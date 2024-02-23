@@ -5,13 +5,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hawshly/controller/bloc/auth_cubit/auth_cubit.dart';
 import 'package:hawshly/controller/bloc/data_cubit/get_data_cubit.dart';
-import 'package:hawshly/firebase_options.dart';
 import 'package:hawshly/model/constant_basic.dart';
 import 'package:hawshly/view/homepage/homepage.dart';
-import 'package:hawshly/view/loginandsignup/loginpage.dart';
-import 'package:hawshly/view/otpscreen/otppage.dart';
-import 'package:hawshly/view/sendmoney/sendmoney.dart';
-import 'package:hawshly/view/testd/datapage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

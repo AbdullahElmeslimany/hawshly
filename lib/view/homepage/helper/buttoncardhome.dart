@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:hawshly/view/testd/testaa.dart';
-import 'package:hawshly/view/sendmoney/sendmoney.dart';
 
 class ButtonTreeSAR extends StatelessWidget {
   const ButtonTreeSAR({super.key});
@@ -16,9 +15,9 @@ class ButtonTreeSAR extends StatelessWidget {
           children: [
             MaterialButton(
               onPressed: () {
-                Get.to(SendAndRequestPage(
-                  namepage: "طلب",
-                ));
+                // Get.to(SendAndRequestPage(
+                //   namepage: "طلب",
+                // ));
               },
               child: Container(
                 width: 50,
@@ -42,9 +41,7 @@ class ButtonTreeSAR extends StatelessWidget {
         Column(
           children: [
             MaterialButton(
-              onPressed: () {
-                
-              },
+              onPressed: () {},
               child: Container(
                 width: 50,
                 height: 50,
@@ -68,9 +65,9 @@ class ButtonTreeSAR extends StatelessWidget {
           children: [
             MaterialButton(
               onPressed: () {
-                Get.to(const SendAndRequestPage(
-                  namepage: "ارسال",
-                ));
+                // Get.to(const SendAndRequestPage(
+                //   namepage: "ارسال",
+                // ));
               },
               child: Container(
                 width: 50,
