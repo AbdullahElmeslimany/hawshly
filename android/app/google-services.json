@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "374684794579",
+    "project_id": "hawshly-1c5db",
+    "storage_bucket": "hawshly-1c5db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374684794579:android:e99a3ae1f932bdfbb59e26",
+        "android_client_info": {
+          "package_name": "com.example.hawshly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbx-Cqpe10_Sunf2fXGi6Ql5Rc1w8wGu8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
