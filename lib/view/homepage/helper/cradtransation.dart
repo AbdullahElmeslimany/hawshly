@@ -1,51 +1,98 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
-Container cradTransation(bool trans, String valueCarancy, String name) {
-    return Container(
-                      height: 85,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade800,
-                          borderRadius: BorderRadius.circular(25)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                      color: trans == true
-                                          ? Colors.greenAccent
-                                          : Colors.red,
-                                      borderRadius:
-                                          BorderRadius.circular(25)),
-                                  child: Icon(
-                                    trans == true
-                                        ? Icons.arrow_upward_rounded
-                                        : Icons.arrow_downward_rounded,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10.0),
-                                  child: Text(valueCarancy,
-                                      style: const TextStyle(fontSize: 18)),
-                                )
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
-                              child: Text(name),
-                            ),
-                            Text(
-                              trans == true ? "ارسال" : "استقبال",
-                              style: const TextStyle(fontSize: 12),
-                            ),
-                          ],
-                        ),
+Container cradTransation(
+    String date, String pricetrans, bool typetrans, String balance) {
+  return Container(
+    height: 150,
+    padding: const EdgeInsets.all(10),
+    decoration: BoxDecoration(
+        color: Colors.white, borderRadius: BorderRadius.circular(25)),
+    child: Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Center(
+                        child: Text(
+                      pricetrans,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                          color: typetrans == true ? Colors.green : Colors.red),
+                    )),
+                  ),
+                  const SizedBox(
+                    width: 50,
+                  ),
+                  Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                        // color: trans == true ? Colors.greenAccent : Colors.red,
+                        borderRadius: BorderRadius.circular(25)),
+                    child: Center(
+                      child: Text(
+                        typetrans == true ? "ايداع" : "نفقة",
+                        style: TextStyle(
+                            color:
+                                typetrans == true ? Colors.green : Colors.red,
+                            fontWeight: FontWeight.w600),
                       ),
-                    );
-  }
+                    ),
+                  ),
+                ],
+              ),
+              Text(
+                date,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: Colors.black54),
+              ),
+            ],
+          ),
+          Divider(
+            color: Colors.grey.shade300,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Center(
+                        child: Text(
+                      balance,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20,
+                          color: Colors.blue.shade700),
+                    )),
+                  ),
+                  const SizedBox(
+                    width: 50,
+                  ),
+                ],
+              ),
+              const Text(
+                "المبلغ المتاح",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                    color: Color.fromARGB(205, 0, 0, 0)),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
+}
