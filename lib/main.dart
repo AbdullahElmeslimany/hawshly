@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'view/app_bar_buttom/bar_buttom_app.dart';
+
+Box? myBox;
+
+Future<Box> openFile(String boxname) async {
+  if (!Hive.isBoxOpen(boxname)) {
+    Hive.init((await getApplicationDocumentsDirectory()).path);
+  }
+  return await Hive.openBox(boxname);
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  myBox = await openFile("Haweshly");
   // await Firebase.initializeApp();
   runApp(const MyApp());
 }

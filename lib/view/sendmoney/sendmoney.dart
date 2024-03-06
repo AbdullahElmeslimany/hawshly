@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 import 'package:hawshly/constant/const_var.dart';
 import 'package:hawshly/model/send_controller.dart';
 import 'package:hawshly/view/sendmoney/helper_send_money/cardfromAccount.dart';

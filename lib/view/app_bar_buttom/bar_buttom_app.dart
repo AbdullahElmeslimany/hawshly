@@ -4,6 +4,7 @@ import 'package:hawshly/view/chart/chart.dart';
 import 'package:hawshly/view/homepage/homepage.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../add_expenses-page/add_expenses_page.dart';
 import '../sendmoney/sendmoney.dart';
 
 class ButtonBarC extends StatelessWidget {
@@ -19,7 +20,7 @@ class ButtonBarC extends StatelessWidget {
       return [
         const MyHomePage(),
         const SendAndRequestPage(),
-        const ChartPage(),
+        const AddExpensesPage(),
         const ChartPage(),
         const AccountPage()
       ];

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hawshly/main.dart';
 import 'package:hawshly/model/home_model.dart';
 import 'package:hawshly/view/homepage/helper/balancecard.dart';
 import 'package:hawshly/view/homepage/helper/barhome.dart';
@@ -54,7 +56,9 @@ class MyHomePage extends StatelessWidget {
                         border: Border.all(
                             color: const Color.fromARGB(255, 255, 64, 64))),
                     child: MaterialButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        await myBox!.put("name", "abdullah");
+                      },
                       child: Text(
                         "مصرفاتك",
                         style: GoogleFonts.alexandria(
@@ -73,13 +77,15 @@ class MyHomePage extends StatelessWidget {
                         border: Border.all(color: Colors.cyan.shade800)),
                     child: MaterialButton(
                       onPressed: () async {
-                        final collection = await BoxCollection.open(
-                            'MyFirstFluffyBox', {'cats', 'dogs'},
-                            path: './');
-                        final catsBox = await collection.openBox('cats');
-                        await catsBox.put('name', 'ali');
-                        final loki = await catsBox.get('name');
-                        print(loki);
+                        final getda = await myBox!.get("name");
+                        print(getda);
+                        // final collection = await BoxCollection.open(
+                        //     'MyFirstFluffyBox', {'cats', 'dogs'},
+                        //     path: './');
+                        // final catsBox = await collection.openBox('cats');
+                        // await catsBox.put('name', 'ali');
+                        // final loki = await catsBox.get('name');
+                        // print(loki);
                       },
                       child: Text(
                         "التوفير",
