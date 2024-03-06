@@ -16,7 +16,7 @@ Future<Box> openFile(String boxname) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  myBox = await openFile("Haweshly");
+  myBox = await openFile("Hawshly");
   // await Firebase.initializeApp();
   runApp(const MyApp());
 }

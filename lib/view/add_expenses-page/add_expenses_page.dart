@@ -43,6 +43,7 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       textFromFieldcustom(
+                          keyboardType: TextInputType.number,
                           onTap: () {},
                           prefixIcon: const Icon(Icons.money),
                           controller: moneyControllar,
@@ -87,7 +88,8 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
                             size: 22,
                           ),
                           // elevation: 40,
-                          style: const TextStyle(color: Colors.black),
+                          style: GoogleFonts.alexandria(
+                              color: Colors.black, fontWeight: FontWeight.bold),
                           underline: Container(
                             color: Colors.white,
                           ),
@@ -100,6 +102,7 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
                           items: list
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
+                              alignment: AlignmentDirectional.centerEnd,
                               value: value,
                               child: Text(value),
                             );
@@ -121,6 +124,7 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
                       maxLines: 2,
                       length: true,
                       width: MediaQuery.sizeOf(context).width - 30),
+                  const Gap(15),
                   textFromFieldcustom(
                       onTap: () async {
                         DateTime? picker = await showDatePicker(

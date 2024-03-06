@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hawshly/view/account/account.dart';
-import 'package:hawshly/view/chart/chart.dart';
+import 'package:hawshly/view/limitmoney/limitmoney.dart';
 import 'package:hawshly/view/homepage/homepage.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../add_expenses-page/add_expenses_page.dart';
-import '../sendmoney/sendmoney.dart';
+import '../tranzation_page/tranzation_page.dart';
 
 class ButtonBarC extends StatelessWidget {
   final data;
@@ -19,9 +19,9 @@ class ButtonBarC extends StatelessWidget {
     List<Widget> Screens() {
       return [
         const MyHomePage(),
-        const SendAndRequestPage(),
+        const TranzationPage(),
         const AddExpensesPage(),
-        const ChartPage(),
+        const LimitMoneyPage(),
         const AccountPage()
       ];
     }
@@ -39,16 +39,14 @@ class ButtonBarC extends StatelessWidget {
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
-          activeColorSecondary: Colors.white,
+          activeColorSecondary: Colors.black,
+          textStyle: const TextStyle(fontSize: 11),
           icon: const Icon(
             Icons.autorenew_rounded,
-            // color: Colors.white,
-            // size: 35,
+            color: Colors.black,
           ),
           title: ("المعاملات"),
-          textStyle: const TextStyle(fontSize: 11),
-          activeColorPrimary: Colors.blue,
-          inactiveColorPrimary: Colors.black,
+          inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
           activeColorSecondary: Colors.white,
@@ -61,26 +59,24 @@ class ButtonBarC extends StatelessWidget {
           inactiveColorPrimary: Colors.black,
         ),
         PersistentBottomNavBarItem(
-          activeColorSecondary: Colors.white,
+          activeColorSecondary: Colors.black,
+          textStyle: const TextStyle(fontSize: 11),
           icon: const Icon(
-            Icons.bar_chart_rounded,
+            Icons.money_off,
             color: Colors.black,
           ),
-          title: ("الاحصاء"),
-          textStyle: const TextStyle(fontSize: 11),
-          activeColorPrimary: Colors.green,
-          inactiveColorPrimary: Colors.black,
+          title: ("الاوامر"),
+          inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
-          activeColorSecondary: Colors.white,
+          activeColorSecondary: Colors.black,
+          textStyle: const TextStyle(fontSize: 11),
           icon: const Icon(
             Icons.account_circle_rounded,
             color: Colors.black,
           ),
           title: ("الحساب"),
-          textStyle: const TextStyle(fontSize: 11),
-          activeColorPrimary: Colors.green,
-          inactiveColorPrimary: Colors.black,
+          inactiveColorPrimary: Colors.grey,
         ),
       ];
     }
