@@ -18,3 +18,11 @@ List<String> list = <String>[
 ];
 
 String dropdownValue = list.first;
+
+List<String> premium = <String>[
+  '6 شهور',
+  'سنة',
+  '12 شهر',
+  '24 شهر',
+];
+String premiumValue = premium.first;

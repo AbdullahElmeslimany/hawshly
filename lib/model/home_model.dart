@@ -1,6 +1,6 @@
 //mode and constant
 
 bool trans = true;
-String balance = "10000";
-String valueCarancy = "2000";
+double balanceHome = 50000;
+double valueCarancy = 5000;
 String name = "علي احمد";

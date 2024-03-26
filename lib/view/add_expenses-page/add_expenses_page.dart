@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hawshly/model/text_field/text_field.dart';
-
 import '../../constant/const_var.dart';
 
 class AddExpensesPage extends StatefulWidget {
@@ -15,7 +14,7 @@ class AddExpensesPage extends StatefulWidget {
 
 class _AddExpensesPageState extends State<AddExpensesPage> {
   TextEditingController dateControllar = TextEditingController();
-  TextEditingController noteControllar = TextEditingController(text: " ");
+  TextEditingController noteControllar = TextEditingController();
   TextEditingController moneyControllar = TextEditingController();
   GlobalKey<FormState> addTrans = GlobalKey<FormState>();
   @override
@@ -31,61 +30,36 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Gap(20),
-                  Text(
-                    "اضف معاملة",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.cyan[700]),
-                  ),
                   const Gap(20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      textFromFieldcustom(
-                          keyboardType: TextInputType.number,
-                          onTap: () {},
-                          prefixIcon: const Icon(Icons.money),
-                          controller: moneyControllar,
-                          text: "المبلغ",
-                          width: MediaQuery.sizeOf(context).width - 100),
-                      const Text(
-                        "جنيه",
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
+                  textFromFieldcustom(
+                      hight: 1,
+                      keyboardType: TextInputType.number,
+                      onTap: () {},
+                      // prefixIcon: const Icon(Icons.money),
+                      controller: moneyControllar,
+                      text: "المبلغ الكلي",
+                      width: MediaQuery.sizeOf(context).width - 100),
                   const Gap(10),
                   Divider(
                     color: Colors.grey[300],
                   ),
                   const Gap(10),
-                  Row(
-                    children: [
-                      Text(
-                        "الغرض من المعاملة",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[700]),
-                      ),
-                    ],
-                  ),
-                  const Gap(10),
                   Center(
                     child: Container(
+                      height: 65,
                       decoration: BoxDecoration(
-                          color: const Color.fromARGB(59, 208, 208, 208),
+                          color: const Color.fromARGB(255, 0, 139, 126),
                           borderRadius: BorderRadius.circular(15)),
                       margin: const EdgeInsets.all(5),
                       width: MediaQuery.sizeOf(context).width - 60,
                       child: Center(
                         child: DropdownButton<String>(
                           // menuMaxHeight: MediaQuery.sizeOf(context).height / 2,
-                          value: dropdownValue,
+                          value: premiumValue,
                           icon: const Icon(
                             Icons.arrow_downward,
                             size: 22,
+                            color: Colors.black,
                           ),
                           // elevation: 40,
                           style: GoogleFonts.alexandria(
@@ -96,10 +70,10 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
                           onChanged: (String? value) {
                             // This is called when the user selects an item.
                             setState(() {
-                              dropdownValue = value!;
+                              premiumValue = value!;
                             });
                           },
-                          items: list
+                          items: premium
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               alignment: AlignmentDirectional.centerEnd,
@@ -111,45 +85,136 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
                       ),
                     ),
                   ),
-                  const Gap(10),
+                  const Gap(5),
                   Divider(
                     color: Colors.grey[300],
                   ),
-                  const Gap(10),
+                  const Gap(5),
                   textFromFieldcustom(
                       onTap: () {},
-                      prefixIcon: const Icon(Icons.note),
+                      // prefixIcon: const Icon(Icons.note),
                       controller: noteControllar,
-                      text: "ملاحظات",
+                      text: "سبب الشراء",
                       maxLines: 2,
                       length: true,
-                      width: MediaQuery.sizeOf(context).width - 30),
+                      width: MediaQuery.sizeOf(context).width - 70),
+                  const Text(
+                    "مدة سداد القسط",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const Gap(15),
-                  textFromFieldcustom(
-                      onTap: () async {
-                        DateTime? picker = await showDatePicker(
-                            context: context,
-                            firstDate: DateTime(2010),
-                            lastDate: DateTime(2025),
-                            initialDate: DateTime.now());
-                        if (picker != null) {
-                          setState(() {
-                            dateControllar.text =
-                                picker.toString().split(" ")[0];
-                          });
-                        }
-                      },
-                      readOnly: true,
-                      prefixIcon: const Icon(Icons.date_range_outlined),
-                      controller: dateControllar,
-                      text: "التاريخ",
-                      width: MediaQuery.sizeOf(context).width - 100),
-                  Gap(MediaQuery.sizeOf(context).height / 5.5),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 30),
+                    padding: const EdgeInsets.all(30),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: const Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "6 شهور",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                            Text(
+                              "0.00",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Color.fromARGB(255, 0, 170, 153)),
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          color: Color.fromARGB(255, 231, 207, 207),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "سنة",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                            Text(
+                              "0.00",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Color.fromARGB(255, 0, 170, 153)),
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          color: Colors.grey,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "24 شهور",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                            Text(
+                              "0.00",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Color.fromARGB(255, 0, 170, 153)),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Gap(10),
+                  const Text(
+                    "المدة المتبقية",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const Gap(10),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 30),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 15),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: const Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "8 شهور",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                            Text(
+                              "0.00",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Color.fromARGB(255, 243, 31, 31)),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Gap(10),
                   Container(
                     height: 60,
-                    width: MediaQuery.sizeOf(context).width - 120,
+                    width: MediaQuery.sizeOf(context).width / 3,
                     decoration: BoxDecoration(
-                        color: Colors.cyan[700],
+                        color: const Color.fromARGB(255, 0, 103, 114),
                         borderRadius: BorderRadius.circular(15)),
                     child: MaterialButton(
                       onPressed: () {
@@ -161,7 +226,7 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
                         }
                       },
                       child: Text(
-                        "اضف معاملة",
+                        "اضافة",
                         style: GoogleFonts.alexandria(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

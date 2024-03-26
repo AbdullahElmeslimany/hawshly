@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hawshly/view/loginandsignup/loginpage.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'view/app_bar_buttom/bar_buttom_app.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Hawshly',
+      title: 'حوشلي',
       // themeMode: ThemeMode.dark,
       // darkTheme: ThemeData(
       //   brightness: Brightness.dark,
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
               bodyLarge: GoogleFonts.alexandria(),
               bodyMedium: GoogleFonts.alexandria(),
               bodySmall: GoogleFonts.alexandria())),
-      home: const ButtonBarC(),
+      // home: const ButtonBarC(),
+      home: const LoginPage(),
     );
   }
 }

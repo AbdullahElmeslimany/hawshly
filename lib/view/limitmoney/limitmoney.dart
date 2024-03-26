@@ -58,7 +58,7 @@ class _LimitMoneyPageState extends State<LimitMoneyPage> {
                         textFromFieldcustom(
                             keyboardType: TextInputType.number,
                             onTap: () {},
-                            prefixIcon: const Icon(Icons.money),
+                            // prefixIcon: const Icon(Icons.money),
                             controller: moneyLimitControllar,
                             text: "المبلغ",
                             width: MediaQuery.sizeOf(context).width - 100),

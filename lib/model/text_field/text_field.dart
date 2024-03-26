@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 textFromFieldcustom({
   bool readOnly = false,
-  required Widget prefixIcon,
   passEnable = false,
   bool rtl = false,
   maxLines = 1,
@@ -58,7 +57,7 @@ textFromFieldcustom({
           ),
           // hintText: text,
           labelText: text,
-          suffixIcon: prefixIcon != null ? prefixIcon : null,
+          // suffixIcon: prefixIcon != null ? prefixIcon : null,
           hintStyle: const TextStyle(fontSize: 13)),
       textAlign: rtl == true ? TextAlign.end : TextAlign.start,
     ),
