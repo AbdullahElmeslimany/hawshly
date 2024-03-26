@@ -5,6 +5,7 @@ import 'package:hawshly/view/loginandsignup/loginpage.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'view/app_bar_buttom/bar_buttom_app.dart';
+import 'view/loginandsignup/signup.dart';
 
 Box? myBox;
 
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
               bodyMedium: GoogleFonts.alexandria(),
               bodySmall: GoogleFonts.alexandria())),
       // home: const ButtonBarC(),
-      home: const LoginPage(),
+      home: const SignPage(),
     );
   }
 }

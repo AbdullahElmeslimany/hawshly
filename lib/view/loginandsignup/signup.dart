@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:hawshly/model/text_field/text_field.dart';
-import 'package:hawshly/view/loginandsignup/signup.dart';
+import 'package:hawshly/view/loginandsignup/loginpage.dart';
 
 import '../app_bar_buttom/bar_buttom_app.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignPage extends StatelessWidget {
+  const SignPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController nameController = TextEditingController();
     TextEditingController emailController = TextEditingController();
     TextEditingController passController = TextEditingController();
-    GlobalKey<FormState> loginKey = GlobalKey<FormState>();
+    TextEditingController confirmPassController = TextEditingController();
+    GlobalKey<FormState> signKey = GlobalKey<FormState>();
+
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.rtl,
@@ -26,7 +29,7 @@ class LoginPage extends StatelessWidget {
               Image.asset("assets/images/bag.png", width: 110, height: 110),
               const Gap(30),
               Form(
-                key: loginKey,
+                key: signKey,
                 child: Container(
                   width: MediaQuery.sizeOf(context).width - 25,
                   padding: const EdgeInsets.symmetric(vertical: 20),
@@ -41,6 +44,14 @@ class LoginPage extends StatelessWidget {
                           onTap: () {},
                           hight: 18,
                           rtl: true,
+                          controller: nameController,
+                          text: "اسم المستخدم",
+                          width: MediaQuery.sizeOf(context).width - 50),
+                      const Gap(10),
+                      textFromFieldcustom(
+                          onTap: () {},
+                          hight: 18,
+                          rtl: true,
                           controller: emailController,
                           text: "البريد الالكتروني",
                           width: MediaQuery.sizeOf(context).width - 50),
@@ -51,6 +62,13 @@ class LoginPage extends StatelessWidget {
                           controller: passController,
                           text: "كلمة المرور",
                           width: MediaQuery.sizeOf(context).width - 50),
+                      const Gap(10),
+                      textFromFieldcustom(
+                          onTap: () {},
+                          hight: 18,
+                          controller: confirmPassController,
+                          text: "تأكيد كلمة المرور",
+                          width: MediaQuery.sizeOf(context).width - 50),
                     ],
                   ),
                 ),
@@ -59,15 +77,15 @@ class LoginPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "ليس لديك حساب : ",
+                    " لديك حساب : ",
                     style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
                   ),
                   InkWell(
                     onTap: () {
-                      Get.offAll(const SignPage());
+                      Get.offAll(const LoginPage());
                     },
                     child: Text(
-                      "سجل الان",
+                      "تسجيل الدخول",
                       style: TextStyle(
                           fontSize: 13,
                           color: Colors.blue.shade800,
@@ -84,12 +102,12 @@ class LoginPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15)),
                 child: MaterialButton(
                   onPressed: () {
-                    if (loginKey.currentState!.validate()) {
+                    if (signKey.currentState!.validate()) {
                       Get.to(const ButtonBarC());
                     }
                   },
                   child: const Text(
-                    "تسجيل الدخول",
+                    "انشاء حساب",
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,

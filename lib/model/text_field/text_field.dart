@@ -45,10 +45,11 @@ textFromFieldcustom({
               ),
               borderRadius: BorderRadius.circular(borderCirlcle)),
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderCirlcle),
-              borderSide: BorderSide(
-                color: color,
-              )),
+            borderRadius: BorderRadius.circular(borderCirlcle),
+            borderSide: BorderSide(
+              color: color,
+            ),
+          ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderCirlcle),
             borderSide: BorderSide(
@@ -57,6 +58,7 @@ textFromFieldcustom({
           ),
           // hintText: text,
           labelText: text,
+          labelStyle: const TextStyle(fontSize: 12),
           // suffixIcon: prefixIcon != null ? prefixIcon : null,
           hintStyle: const TextStyle(fontSize: 13)),
       textAlign: rtl == true ? TextAlign.end : TextAlign.start,
