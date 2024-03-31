@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:hawshly/model/text_field/text_field.dart';
 import 'package:hawshly/view/loginandsignup/signup.dart';
-
 import '../app_bar_buttom/bar_buttom_app.dart';
 
 class LoginPage extends StatelessWidget {

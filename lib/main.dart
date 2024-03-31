@@ -4,11 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hawshly/view/loginandsignup/loginpage.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'view/app_bar_buttom/bar_buttom_app.dart';
-import 'view/loginandsignup/signup.dart';
 
 Box? myBox;
-
 Future<Box> openFile(String boxname) async {
   if (!Hive.isBoxOpen(boxname)) {
     Hive.init((await getApplicationDocumentsDirectory()).path);
@@ -31,21 +28,16 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'حوشلي',
-      // themeMode: ThemeMode.dark,
-      // darkTheme: ThemeData(
-      //   brightness: Brightness.dark,
-      // ),
-
       theme: ThemeData(
-          // scaffoldBackgroundColor: backgroundColors,
-          // colorScheme: ColorScheme.fromSeed(seedColor: textColors),
-          useMaterial3: true,
-          textTheme: TextTheme(
-              bodyLarge: GoogleFonts.alexandria(),
-              bodyMedium: GoogleFonts.alexandria(),
-              bodySmall: GoogleFonts.alexandria())),
+        useMaterial3: true,
+        textTheme: TextTheme(
+          bodyLarge: GoogleFonts.alexandria(),
+          bodyMedium: GoogleFonts.alexandria(),
+          bodySmall: GoogleFonts.alexandria(),
+        ),
+      ),
       // home: const ButtonBarC(),
-      home: const SignPage(),
+      home: const LoginPage(),
     );
   }
 }
