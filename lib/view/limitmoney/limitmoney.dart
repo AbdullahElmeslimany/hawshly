@@ -16,6 +16,8 @@ class LimitMoneyPage extends StatefulWidget {
 
 class _LimitMoneyPageState extends State<LimitMoneyPage> {
   TextEditingController moneyLimitControllar = TextEditingController();
+  TextEditingController dateControllar = TextEditingController();
+  TextEditingController infoControllar = TextEditingController();
   GlobalKey<FormState> addLimitTrans = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -33,29 +35,21 @@ class _LimitMoneyPageState extends State<LimitMoneyPage> {
                   children: [
                     const Gap(20),
                     Text(
-                      "حدود الصرف",
+                      "اضف معاملة",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.cyan[700]),
                     ),
                     const Gap(20),
-                    Row(
-                      children: [
-                        Text(
-                          "اقصي مبلغ",
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[700]),
-                        ),
-                      ],
-                    ),
                     const Gap(10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         textFromFieldcustom(
+                            colorbackground:
+                                const Color.fromARGB(170, 76, 175, 79),
+                            bordercolor: Colors.lightGreen,
                             keyboardType: TextInputType.number,
                             onTap: () {},
                             // prefixIcon: const Icon(Icons.money),
@@ -74,15 +68,11 @@ class _LimitMoneyPageState extends State<LimitMoneyPage> {
                       color: Colors.grey[300],
                     ),
                     const Gap(10),
-                    Row(
-                      children: [
-                        Text(
-                          "المعاملة",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[700]),
-                        ),
-                      ],
+                    const Text(
+                      "الغرض من المعاملة",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const Gap(10),
                     Center(
@@ -130,8 +120,36 @@ class _LimitMoneyPageState extends State<LimitMoneyPage> {
                       color: Colors.grey[300],
                     ),
                     const Gap(10),
+                    textFromFieldcustom(
+                        length: true,
+                        maxLines: 3,
+                        colorbackground: const Color.fromARGB(170, 76, 175, 79),
+                        bordercolor: Colors.lightGreen,
+                        keyboardType: TextInputType.number,
+                        onTap: () {},
+                        // prefixIcon: const Icon(Icons.money),
+                        controller: infoControllar,
+                        text: "ملاحظات",
+                        width: MediaQuery.sizeOf(context).width - 100),
                     const Gap(15),
-                    Gap(MediaQuery.sizeOf(context).height / 5.5),
+                    textFromFieldcustom(
+                        onTap: () async {
+                          final dateTime = await showDatePicker(
+                            context: context,
+                            firstDate: DateTime(2017),
+                            lastDate: DateTime(2025),
+                            initialDate: DateTime.now(),
+                          );
+                          print(
+                              "+++++++++++++++++++++++++++++++++++++++++++++++++++");
+                          setState(() {
+                            dateControllar.text = dateTime!.toString();
+                          });
+                        },
+                        controller: dateControllar,
+                        text: "التاريخ",
+                        width: MediaQuery.sizeOf(context).width - 100),
+                    const Gap(80),
                     Container(
                       height: 60,
                       width: MediaQuery.sizeOf(context).width - 120,
@@ -159,7 +177,7 @@ class _LimitMoneyPageState extends State<LimitMoneyPage> {
                           }
                         },
                         child: Text(
-                          "اضافة",
+                          "اضافة معاملة",
                           style: GoogleFonts.alexandria(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

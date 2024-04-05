@@ -19,13 +19,18 @@ class SignPage extends StatelessWidget {
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.rtl,
-        child: SizedBox(
+        child: Container(
           width: MediaQuery.sizeOf(context).width,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/images/Vector.png"))),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset("assets/images/bag.png", width: 110, height: 110),
+              Image.asset("assets/images/logoIcon.png",
+                  width: 135, height: 100),
               const Gap(30),
               Form(
                 key: signKey,

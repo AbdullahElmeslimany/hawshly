@@ -28,15 +28,19 @@ class ChartPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             itemCard(title: "الرصيد الاجمالي", number: 50000),
-                            itemCard(title: "الديون المدفوعة", number: 0),
+                            itemCard(
+                                title: "الديون المدفوعة",
+                                number: 0,
+                                minus: true),
                           ],
                         ),
                         const Gap(15),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            itemCard(title: "الرصيد الاجمالي", number: -50000),
-                            itemCard(title: "الرصيد الاجمالي", number: 0),
+                            itemCard(
+                                title: "المصاريف", number: -50000, minus: true),
+                            itemCard(title: "الديون المستلمة", number: 0),
                           ],
                         )
                       ],
@@ -86,6 +90,7 @@ class ChartPage extends StatelessWidget {
   }
 
   Column itemCard({
+    bool minus = false,
     required String title,
     required int number,
   }) {
@@ -97,14 +102,19 @@ class ChartPage extends StatelessWidget {
         ),
         const Gap(7),
         Container(
+          width: 100,
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Colors.green[300]),
-          child: Text(
-            number.toString(),
-            style: const TextStyle(
-                fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+          child: Center(
+            child: Text(
+              number.toString(),
+              style: TextStyle(
+                  fontSize: 16,
+                  color: minus == false ? Colors.white : Colors.red,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         )
       ],

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hawshly/view/account/account.dart';
+import 'package:hawshly/view/chart/chart.dart';
 import 'package:hawshly/view/limitmoney/limitmoney.dart';
 import 'package:hawshly/view/homepage/homepage.dart';
+import 'package:hawshly/view/suggest_page/suggest_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../add_expenses-page/add_expenses_page.dart';
@@ -19,10 +21,11 @@ class ButtonBarC extends StatelessWidget {
     List<Widget> Screens() {
       return [
         const MyHomePage(),
-        const TranzationPage(),
-        const AddExpensesPage(),
         const LimitMoneyPage(),
-        const AccountPage()
+        const SuggestPage(),
+        const AddExpensesPage(),
+        const ChartPage(),
+        const AccountPage(),
       ];
     }
 
@@ -49,14 +52,14 @@ class ButtonBarC extends StatelessWidget {
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
-          activeColorSecondary: Colors.white,
+          activeColorSecondary: Colors.black,
+          textStyle: const TextStyle(fontSize: 11),
           icon: const Icon(
-            Icons.add,
+            Icons.app_registration_rounded,
             color: Colors.black,
           ),
-          title: (" "),
-          activeColorPrimary: Colors.cyan.shade800,
-          inactiveColorPrimary: Colors.black,
+          title: ("الاقتراحات"),
+          inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
           activeColorSecondary: Colors.black,
@@ -65,7 +68,17 @@ class ButtonBarC extends StatelessWidget {
             Icons.money_off,
             color: Colors.black,
           ),
-          title: ("الاوامر"),
+          title: ("الاقساط"),
+          inactiveColorPrimary: Colors.grey,
+        ),
+        PersistentBottomNavBarItem(
+          activeColorSecondary: Colors.black,
+          textStyle: const TextStyle(fontSize: 11),
+          icon: const Icon(
+            Icons.bar_chart_rounded,
+            color: Colors.black,
+          ),
+          title: ("الاحصاء"),
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
@@ -107,7 +120,7 @@ class ButtonBarC extends StatelessWidget {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
-      navBarStyle: NavBarStyle.style15,
+      navBarStyle: NavBarStyle.style8,
     );
   }
 }

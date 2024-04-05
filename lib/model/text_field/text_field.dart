@@ -14,7 +14,8 @@ textFromFieldcustom({
   double hight = 23,
   double padding = 10,
   double borderCirlcle = 10,
-  Color color = const Color.fromARGB(99, 192, 192, 192),
+  Color bordercolor = const Color.fromARGB(99, 192, 192, 192),
+  Color colorbackground = Colors.white,
 }) {
   return SizedBox(
     width: width,
@@ -38,7 +39,7 @@ textFromFieldcustom({
               EdgeInsets.symmetric(horizontal: padding, vertical: hight),
           //active background Color
           filled: true,
-          fillColor: Colors.white,
+          fillColor: colorbackground,
           border: OutlineInputBorder(
               borderSide: const BorderSide(
                 color: Colors.grey,
@@ -47,13 +48,13 @@ textFromFieldcustom({
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderCirlcle),
             borderSide: BorderSide(
-              color: color,
+              color: bordercolor,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderCirlcle),
             borderSide: BorderSide(
-              color: color,
+              color: bordercolor,
             ),
           ),
           // hintText: text,
