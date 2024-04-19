@@ -10,8 +10,9 @@ import '../add_expenses-page/add_expenses_page.dart';
 import '../tranzation_page/tranzation_page.dart';
 
 class ButtonBarC extends StatelessWidget {
-  final data;
-  const ButtonBarC({super.key, this.data});
+  final uID;
+
+  const ButtonBarC({super.key, required this.uID});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +24,9 @@ class ButtonBarC extends StatelessWidget {
         const MyHomePage(),
         const LimitMoneyPage(),
         const SuggestPage(),
-        const AddExpensesPage(),
+         AddExpensesPage(id: uID),
         const ChartPage(),
-        const AccountPage(),
+        AccountPage(id: uID),
       ];
     }
 

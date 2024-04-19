@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hawshly/controller/bloc/balance_cubit/get_balance_data_cubit.dart';
 import 'package:hawshly/model/text_field/text_field.dart';
 import '../../constant/const_var.dart';
 
 class AddExpensesPage extends StatefulWidget {
-  const AddExpensesPage({super.key});
+  final id;
+  const AddExpensesPage({super.key, this.id});
 
   @override
   State<AddExpensesPage> createState() => _AddExpensesPageState();
@@ -19,6 +22,7 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
   GlobalKey<FormState> addTrans = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: Directionality(
