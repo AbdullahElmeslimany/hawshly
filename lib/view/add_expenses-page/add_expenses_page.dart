@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hawshly/controller/bloc/balance_cubit/get_balance_data_cubit.dart';
+import 'package:hawshly/controller/bloc/cubit/change_value_cubit.dart';
 import 'package:hawshly/model/text_field/text_field.dart';
 import '../../constant/const_var.dart';
+import '../../controller/add expection/add_expation.dart';
 
 class AddExpensesPage extends StatefulWidget {
   final id;
@@ -20,9 +20,10 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
   TextEditingController noteControllar = TextEditingController();
   TextEditingController moneyControllar = TextEditingController();
   GlobalKey<FormState> addTrans = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-
+    final cubitValue = BlocProvider.of<ChangeValueCubit>(context);
     return Scaffold(
       body: SafeArea(
         child: Directionality(
@@ -75,6 +76,9 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
                             // This is called when the user selects an item.
                             setState(() {
                               premiumValue = value!;
+                              cubitValue.calculation(
+                                  value: int.parse(moneyControllar.text),
+                                  typeMonth: value);
                             });
                           },
                           items: premium
@@ -110,109 +114,114 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
                     ),
                   ),
                   const Gap(15),
+
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 30),
                     padding: const EdgeInsets.all(30),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(15)),
-                    child: const Column(
+                    child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "6 شهور",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
-                            ),
-                            Text(
-                              "0.00",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Color.fromARGB(255, 0, 170, 153)),
-                            ),
-                          ],
+                        const Text(
+                          "الخطة المقترحة",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
                         ),
-                        Divider(
+                        const Divider(
                           color: Color.fromARGB(255, 231, 207, 207),
                         ),
+                        const Gap(10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "سنة",
-                              style: TextStyle(
+                              premiumValue,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
                             Text(
-                              "0.00",
-                              style: TextStyle(
+                              moneyControllar.text,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
                                   color: Color.fromARGB(255, 0, 170, 153)),
                             ),
                           ],
                         ),
-                        Divider(
+                        const Divider(
                           color: Colors.grey,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "24 شهور",
+                            const Text(
+                              "كل شهر",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
-                            Text(
-                              "0.00",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Color.fromARGB(255, 0, 170, 153)),
+                            BlocBuilder<ChangeValueCubit, ChangeValueState>(
+                              builder: (context, state) {
+                                if (state is SuccessChangeState) {
+                                  return Text(
+                                    state.value.toString(),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        color:
+                                            Color.fromARGB(255, 0, 170, 153)),
+                                  );
+                                }
+                                return Text(
+                                  cubitValue.valuePrice.toString(),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      color: Color.fromARGB(255, 0, 170, 153)),
+                                );
+                              },
                             ),
                           ],
                         ),
                       ],
                     ),
                   ),
+
                   const Gap(10),
-                  const Text(
-                    "المدة المتبقية",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  const Gap(10),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 30),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 15),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(15)),
-                    child: const Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "8 شهور",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
-                            ),
-                            Text(
-                              "0.00",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Color.fromARGB(255, 243, 31, 31)),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  // const Text(
+                  //   "المدة المتبقية",
+                  //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  // ),
+                  // const Gap(10),
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(horizontal: 30),
+                  //   padding: const EdgeInsets.symmetric(
+                  //       horizontal: 30, vertical: 15),
+                  //   decoration: BoxDecoration(
+                  //       border: Border.all(color: Colors.grey),
+                  //       borderRadius: BorderRadius.circular(15)),
+                  //   child: const Column(
+                  //     children: [
+                  //       Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //         children: [
+                  //           Text(
+                  //             "8 شهور",
+                  //             style: TextStyle(
+                  //                 fontWeight: FontWeight.bold, fontSize: 16),
+                  //           ),
+                  //           Text(
+                  //             "0.00",
+                  //             style: TextStyle(
+                  //                 fontWeight: FontWeight.bold,
+                  //                 fontSize: 20,
+                  //                 color: Color.fromARGB(255, 243, 31, 31)),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   const Gap(10),
                   Container(
                     height: 60,
@@ -223,10 +232,13 @@ class _AddExpensesPageState extends State<AddExpensesPage> {
                     child: MaterialButton(
                       onPressed: () {
                         if (addTrans.currentState!.validate()) {
-                          Get.defaultDialog(actions: [
-                            Text(
-                                "${dateControllar.text} ${noteControllar.text} ${moneyControllar.text} $dropdownValue")
-                          ]);
+                          AddExpation.addReport(
+                              id: widget.id,
+                              money: moneyControllar.text,
+                              reason: noteControllar.text,
+                              period: premiumValue,
+                              onePeriod: cubitValue.valuePrice,
+                              totalComplete: 0);
                         }
                       },
                       child: Text(

@@ -69,14 +69,20 @@ class LoginAndRegesterCubit extends Cubit<LoginAndRegesterState> {
         email: email,
         password: password,
       )
-          .then((value) {
+          .then((value) async {
         print(value.user!.uid);
 
-        FirebaseFirestore.instance.collection("users").add({
+        await FirebaseFirestore.instance.collection("users").add({
           "email": email,
           "name": name,
           "admin": admin,
           "Uid": value.user!.uid
+        });
+        await FirebaseFirestore.instance.collection("balance").add({
+          "uid": value.user!.uid,
+          "balance": 50000,
+          "remainbalance": 50000,
+          "withdrawal": 0,
         });
         Get.to(
           ButtonBarC(

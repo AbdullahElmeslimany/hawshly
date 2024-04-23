@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hawshly/view/account/account.dart';
 import 'package:hawshly/view/chart/chart.dart';
 import 'package:hawshly/view/limitmoney/limitmoney.dart';
@@ -6,6 +7,7 @@ import 'package:hawshly/view/homepage/homepage.dart';
 import 'package:hawshly/view/suggest_page/suggest_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../../controller/bloc/balance_cubit/get_balance_data_cubit.dart';
 import '../add_expenses-page/add_expenses_page.dart';
 import '../tranzation_page/tranzation_page.dart';
 
@@ -16,16 +18,29 @@ class ButtonBarC extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubitBalance = BlocProvider.of<GetBalanceDataCubit>(context);
+    cubitBalance.getBalanceData(id: uID);
     PersistentTabController controller;
 
     controller = PersistentTabController(initialIndex: 0);
     List<Widget> Screens() {
       return [
-        const MyHomePage(),
-        const LimitMoneyPage(),
-        const SuggestPage(),
-         AddExpensesPage(id: uID),
-        const ChartPage(),
+        MyHomePage(
+          id: uID,
+          data: cubitBalance.data,
+        ),
+        LimitMoneyPage(
+          id: uID,
+          data: cubitBalance.data,
+        ),
+        SuggestPage(
+          id: uID,
+        ),
+        AddExpensesPage(id: uID),
+        ChartPage(
+          id: uID,
+          data: cubitBalance.data,
+        ),
         AccountPage(id: uID),
       ];
     }

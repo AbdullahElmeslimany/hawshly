@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,10 +7,13 @@ import 'package:hawshly/main.dart';
 import 'package:hawshly/view/categores/categorises.dart';
 
 import '../../constant/const_var.dart';
+import '../../controller/bloc/trans_cubit/trans_cubit.dart';
 import '../../model/text_field/text_field.dart';
 
 class LimitMoneyPage extends StatefulWidget {
-  const LimitMoneyPage({super.key});
+  final id;
+  final data;
+  const LimitMoneyPage({super.key, this.id, this.data});
 
   @override
   State<LimitMoneyPage> createState() => _LimitMoneyPageState();
@@ -22,6 +26,7 @@ class _LimitMoneyPageState extends State<LimitMoneyPage> {
   GlobalKey<FormState> addLimitTrans = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<TransCubit>(context);
     return Scaffold(
       body: SafeArea(
         child: Directionality(
@@ -133,9 +138,7 @@ class _LimitMoneyPageState extends State<LimitMoneyPage> {
                         maxLines: 3,
                         colorbackground: const Color.fromARGB(170, 76, 175, 79),
                         bordercolor: Colors.lightGreen,
-                        keyboardType: TextInputType.number,
                         onTap: () {},
-                        // prefixIcon: const Icon(Icons.money),
                         controller: infoControllar,
                         text: "ملاحظات",
                         width: MediaQuery.sizeOf(context).width - 100),
@@ -167,21 +170,21 @@ class _LimitMoneyPageState extends State<LimitMoneyPage> {
                       child: MaterialButton(
                         onPressed: () async {
                           if (addLimitTrans.currentState!.validate()) {
-                            // Get.defaultDialog(
-                            //     content: Row(
-                            //       mainAxisAlignment: MainAxisAlignment.center,
-                            //       children: [
-                            //         const Text("   جنية  "),
-                            //         Text(moneyLimitControllar.text),
-                            //       ],
-                            //     ),
-                            //     title: "اقصي مبلغ للصرف ( $dropdownValue )",
-                            //     actions: []);
-                            await myBox!
-                                .put(dropdownValue, moneyLimitControllar.text);
-                            var value1 = myBox!.get(dropdownValue);
+                            cubit.addTrans(
+                                id: widget.id,
+                                data: widget.data,
+                                money: moneyLimitControllar.text,
+                                reason: "reason",
+                                note: infoControllar.text,
+                                date: dateControllar.text);
+                            moneyLimitControllar.clear();
+                            infoControllar.clear();
+                            dateControllar.clear();
+                            // await myBox!
+                            //     .put(dropdownValue, moneyLimitControllar.text);
+                            // var value1 = myBox!.get(dropdownValue);
 
-                            print(value1);
+                            // print(value1);
                           }
                         },
                         child: Text(

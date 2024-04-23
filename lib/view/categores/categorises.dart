@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class Categories extends StatelessWidget {
   const Categories({super.key});
@@ -121,7 +122,7 @@ class Categories extends StatelessWidget {
   textAndtap(title) {
     return InkWell(
       onTap: () {
-        print(title);
+        Get.defaultDialog(title: "تم اختيار", content: Text(title));
       },
       child: Text(
         title,

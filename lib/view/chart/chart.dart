@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../controller/bloc/balance_cubit/get_balance_data_cubit.dart';
+
 class ChartPage extends StatelessWidget {
-  const ChartPage({super.key});
+  final id;
+  final data;
+  const ChartPage({super.key, this.data, this.id});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<GetBalanceDataCubit>(context);
     return Scaffold(
       body: SafeArea(
         child: Directionality(
@@ -27,7 +33,9 @@ class ChartPage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            itemCard(title: "الرصيد الاجمالي", number: 50000),
+                            itemCard(
+                                title: "الرصيد الاجمالي",
+                                number: cubit.data[0]["balance"]),
                             itemCard(
                                 title: "الديون المدفوعة",
                                 number: 0,
@@ -39,7 +47,9 @@ class ChartPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             itemCard(
-                                title: "المصاريف", number: -50000, minus: true),
+                                title: "المصاريف",
+                                number: -cubit.data[0]["withdrawal"],
+                                minus: true),
                             itemCard(title: "الديون المستلمة", number: 0),
                           ],
                         )
@@ -55,11 +65,12 @@ class ChartPage extends StatelessWidget {
                         LineSeries<SalesData, String>(
                             // Bind data source
                             dataSource: <SalesData>[
-                              SalesData('Jan', 0),
-                              SalesData('Feb', 0),
-                              SalesData('Mar', 50000),
-                              SalesData('Apr', 0),
-                              SalesData('May', 0)
+                              SalesData('Jan', 100),
+                              SalesData('Feb', 200),
+                              SalesData('Mar', 500),
+                              SalesData('Apr', 300),
+                              SalesData('May', 120),
+                              SalesData('Jun', 420)
                             ],
                             xValueMapper: (SalesData sales, _) => sales.year,
                             yValueMapper: (SalesData sales, _) => sales.sales)
@@ -70,10 +81,11 @@ class ChartPage extends StatelessWidget {
                   HistogramSeries<SalesData, num>(
                       dataSource: <SalesData>[
                         SalesData('Jan', 50000),
-                        SalesData('Feb', 50000),
-                        SalesData('Mar', 0),
+                        SalesData('Feb', 0),
+                        SalesData('Mar', 50000),
                         SalesData('Apr', 50000),
-                        SalesData('May', 50000)
+                        SalesData('Jun', 0),
+                        SalesData('May', 50000),
                       ],
                       yValueMapper: (SalesData sales, _) => sales.sales,
                       binInterval: 20,
