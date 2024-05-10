@@ -25,4 +25,6 @@ class GetBalanceDataCubit extends Cubit<GetBalanceDataState> {
     //   emit(GetBalanceDataSucess());
     // });
   }
+
+  void cubitTrans({required id}) {}
 }

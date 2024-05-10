@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hawshly/view/food/food.dart';
 import 'package:hawshly/view/loginandsignup/loginpage.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'controller/bloc/balance_cubit/get_balance_data_cubit.dart';
 import 'controller/bloc/cubit/change_value_cubit.dart';
 import 'controller/bloc/data_cubit/get_data_cubit.dart';
@@ -62,7 +62,9 @@ class MyApp extends StatelessWidget {
             bodySmall: GoogleFonts.alexandria(),
           ),
         ),
-        // home: const Categories(),
+        // home: FoodPage(
+        //   person: 3,
+        // ),
         home: const LoginPage(),
       ),
     );

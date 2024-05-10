@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
-
+import '../../../view/categores/categorises.dart';
 part 'trans_state.dart';
 
 class TransCubit extends Cubit<TransState> {
@@ -12,11 +12,14 @@ class TransCubit extends Cubit<TransState> {
   getData({required id}) async {
     emit(WaitGetDataState());
 
-    QuerySnapshot getdata = await FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection("trans")
-        .where('name', isEqualTo: "11")
-        .get();
-    data.addAll(getdata.docs);
+        .where('id', isEqualTo: id)
+        .snapshots()
+        .listen((event) {
+      data.clear();
+      data.addAll(event.docs);
+    });
 
     emit(SuccessGetDataState(data: data));
   }
@@ -33,18 +36,46 @@ class TransCubit extends Cubit<TransState> {
     print(data[0]["remainbalance"]);
     print(data[0]["withdrawal"] - price);
     print(data[0].id);
-    FirebaseFirestore.instance.collection('trans').add({
-      "id": id,
-      "money": money,
-      "reason": reason,
-      "note": note,
-      "date": date,
-    }).then((value) {
-      FirebaseFirestore.instance.collection('balance').doc(data[0].id).update({
-        "remainbalance": data[0]["remainbalance"] - price,
-        "withdrawal": data[0]["withdrawal"] + price,
+    if (categoreis == null) {
+    } else if (categoreis == "الراتب" ||
+        categoreis == "المكافآت" ||
+        categoreis == "الإضافي" ||
+        categoreis == "المبيعات" ||
+        categoreis == "أخرى") {
+      FirebaseFirestore.instance.collection('trans').add({
+        "id": id,
+        "money": money,
+        "reason": reason,
+        "note": note,
+        "date": date,
+      }).then((value) {
+        FirebaseFirestore.instance
+            .collection('balance')
+            .doc(data[0].id)
+            .update({
+          "remainbalance": data[0]["remainbalance"] + price,
+          // "withdrawal": data[0]["withdrawal"] - price,
+          "balance": data[0]["balance"] + price,
+        });
+        Get.defaultDialog(title: 'تمت اضافة المعاملة بنجاح', content: Text(""));
       });
-      Get.defaultDialog(title: 'تمت اضافة المعاملة بنجاح', content: Text(""));
-    });
+    } else {
+      FirebaseFirestore.instance.collection('trans').add({
+        "id": id,
+        "money": money,
+        "reason": reason,
+        "note": note,
+        "date": date,
+      }).then((value) {
+        FirebaseFirestore.instance
+            .collection('balance')
+            .doc(data[0].id)
+            .update({
+          "remainbalance": data[0]["remainbalance"] - price,
+          "withdrawal": data[0]["withdrawal"] + price,
+        });
+        Get.defaultDialog(title: 'تمت اضافة المعاملة بنجاح', content: Text(""));
+      });
+    }
   }
 }

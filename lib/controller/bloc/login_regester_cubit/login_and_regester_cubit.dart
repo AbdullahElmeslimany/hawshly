@@ -50,7 +50,9 @@ class LoginAndRegesterCubit extends Cubit<LoginAndRegesterState> {
       {required String email,
       required String password,
       required String name,
-      required bool admin}) async {
+      required bool admin,
+      required String blance,
+      required String person}) async {
     print("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
     loading = true;
     emit(WaitingState());
@@ -70,18 +72,17 @@ class LoginAndRegesterCubit extends Cubit<LoginAndRegesterState> {
         password: password,
       )
           .then((value) async {
-        print(value.user!.uid);
-
         await FirebaseFirestore.instance.collection("users").add({
           "email": email,
           "name": name,
           "admin": admin,
+          "person": person,
           "Uid": value.user!.uid
         });
         await FirebaseFirestore.instance.collection("balance").add({
           "uid": value.user!.uid,
-          "balance": 50000,
-          "remainbalance": 50000,
+          "balance": blance,
+          "remainbalance": blance,
           "withdrawal": 0,
         });
         Get.to(

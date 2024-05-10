@@ -45,6 +45,7 @@ class AccountPage extends StatelessWidget {
                     text: "الاسم"),
                 const Gap(20),
                 textFromFieldcustom(
+                    readOnly: true,
                     width: MediaQuery.sizeOf(context).width - 30,
                     onTap: () {},
                     controller: emailController,

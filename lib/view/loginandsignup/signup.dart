@@ -12,8 +12,10 @@ class SignPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController nameController = TextEditingController();
+    TextEditingController blanceController = TextEditingController();
     TextEditingController emailController = TextEditingController();
     TextEditingController passController = TextEditingController();
+    TextEditingController personController = TextEditingController();
     TextEditingController confirmPassController = TextEditingController();
     GlobalKey<FormState> signKey = GlobalKey<FormState>();
     final cubitAuth = BlocProvider.of<LoginAndRegesterCubit>(context);
@@ -39,10 +41,10 @@ class SignPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Gap(90),
+                  const Gap(60),
                   Image.asset("assets/images/logoIcon.png",
                       width: 135, height: 100),
-                  const Gap(30),
+                  const Gap(15),
                   Form(
                     key: signKey,
                     child: Container(
@@ -69,6 +71,22 @@ class SignPage extends StatelessWidget {
                               rtl: true,
                               controller: emailController,
                               text: "البريد الالكتروني",
+                              width: MediaQuery.sizeOf(context).width - 50),
+                          const Gap(10),
+                          textFromFieldcustom(
+                              onTap: () {},
+                              hight: 18,
+                              rtl: true,
+                              controller: personController,
+                              text: "عدد الافراد",
+                              width: MediaQuery.sizeOf(context).width - 50),
+                          const Gap(10),
+                          textFromFieldcustom(
+                              onTap: () {},
+                              hight: 18,
+                              rtl: true,
+                              controller: blanceController,
+                              text: "الرصيد",
                               width: MediaQuery.sizeOf(context).width - 50),
                           const Gap(10),
                           textFromFieldcustom(
@@ -123,9 +141,11 @@ class SignPage extends StatelessWidget {
                       onPressed: () {
                         if (signKey.currentState!.validate()) {
                           cubitAuth.regester(
+                              blance: blanceController.text,
                               email: emailController.text,
                               password: passController.text,
                               name: nameController.text,
+                              person: personController.text,
                               admin: false);
                         }
                       },

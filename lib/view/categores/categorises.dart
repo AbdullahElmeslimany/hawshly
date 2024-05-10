@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
+String? categoreis;
+
 class Categories extends StatelessWidget {
   const Categories({super.key});
 
@@ -26,8 +28,8 @@ class Categories extends StatelessWidget {
               unselectedLabelColor: Colors.grey,
               indicatorSize: TabBarIndicatorSize.label,
               tabs: const [
-                Tab(text: "الدخل"),
                 Tab(text: "المصروف"),
+                Tab(text: "الدخل"),
                 Tab(text: "الديون"),
               ],
             ),
@@ -35,8 +37,8 @@ class Categories extends StatelessWidget {
           body: TabBarView(children: [
             Column(
               children: [
-                const Gap(25),
-                cardGrey(context, "تحويل رصيد"),
+                // const Gap(25),
+                // cardGrey(context, "تحويل رصيد"),
                 const Gap(25),
                 cardGrey(context, "سحب رصيد"),
                 const Gap(25),
@@ -123,6 +125,10 @@ class Categories extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.defaultDialog(title: "تم اختيار", content: Text(title));
+        categoreis = title;
+        print("===============================================");
+        print(categoreis);
+        print("===============================================");
       },
       child: Text(
         title,
@@ -135,6 +141,9 @@ class Categories extends StatelessWidget {
     return InkWell(
       onTap: () {
         print(title);
+        categoreis = title;
+        print("===============================================");
+        print(categoreis);
       },
       child: Container(
         height: 50,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hawshly/controller/bloc/data_cubit/get_data_cubit.dart';
-import 'package:hawshly/model/home_model.dart';
-
+import 'package:hawshly/view/food/food.dart';
 import '../../controller/bloc/balance_cubit/get_balance_data_cubit.dart';
+import '../../controller/bloc/trans_cubit/trans_cubit.dart';
 
 class MyHomePage extends StatelessWidget {
   final id;
@@ -15,7 +15,9 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<GetBalanceDataCubit>(context);
+    final cubitTrans = BlocProvider.of<TransCubit>(context);
     cubit.getBalanceData(id: id);
+    cubitTrans.getData(id: id);
     // print(data[0]["balance"]);
 
     return Scaffold(
@@ -48,7 +50,7 @@ class MyHomePage extends StatelessWidget {
                           title: "الرصيد الباقي",
                           colortext: const Color.fromARGB(197, 0, 121, 16),
                           colorBack: const Color.fromARGB(198, 100, 246, 120)),
-                      cubit.data[0]["remainbalance"] >= 10000
+                      cubit.data[0]["remainbalance"] <= 10000
                           ? Text(
                               "الرصيد الباقي قليل لن يكفيك لبقية الشهر",
                               style: TextStyle(
@@ -57,54 +59,93 @@ class MyHomePage extends StatelessWidget {
                             )
                           : Container(),
                       const Gap(15),
+                      InkWell(
+                        onTap: () {
+                          Get.to(FoodPage(
+                            person: int.parse(cubit.data[0]["person"]),
+                          ));
+                        },
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width - 45,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                "assets/images/meal.png",
+                                height: 50,
+                              ),
+                              const Text(
+                                "خطة الوجبات",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const Gap(15),
                       const Text(
                         "اخر المعاملات",
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: transation.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            height: 65,
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            decoration: BoxDecoration(
-                                border: Border.all(),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "\$ ${transation[index]["pricetrans"]}",
-                                  style: const TextStyle(
-                                      fontSize: 20,
-                                      color: Color.fromARGB(255, 0, 216, 25),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      transation[index]["title"],
-                                      style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 20.0),
-                                      child: Image.asset(
-                                        transation[index]["icon"],
-                                        height: 40,
+                      BlocBuilder<TransCubit, TransState>(
+                        builder: (context, state) {
+                          if (state is SuccessGetDataState) {
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: cubitTrans.data.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  height: 65,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "\$ ${cubitTrans.data[index]["money"]}",
+                                        style: const TextStyle(
+                                            fontSize: 20,
+                                            color:
+                                                Color.fromARGB(255, 0, 216, 25),
+                                            fontWeight: FontWeight.bold),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
+                                      Row(
+                                        children: [
+                                          Text(
+                                            cubitTrans.data[index]["reason"],
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          // Padding(
+                                          //   padding:
+                                          //       const EdgeInsets.only(left: 20.0),
+                                          //   child: Image.asset(
+                                          //     transation[index]["icon"],
+                                          //     height: 40,
+                                          //   ),
+                                          // ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                          return const Center(
+                              child: CircularProgressIndicator());
                         },
                       ),
                       Container(

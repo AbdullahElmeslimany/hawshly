@@ -18,7 +18,6 @@ abstract class AddExpation {
       "totalComplete": totalComplete,
     }).then((value) {
       Get.snackbar("تم", "تم الاضافة بنجاح");
-
       return value;
     }).catchError((error) => Get.snackbar("خطأ", "حدث خطأ ما حاول مرة اخرى"));
   }
