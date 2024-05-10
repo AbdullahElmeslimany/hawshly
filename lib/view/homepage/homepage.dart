@@ -61,6 +61,7 @@ class MyHomePage extends StatelessWidget {
                       const Gap(15),
                       InkWell(
                         onTap: () {
+                          print(data[0].id);
                           Get.to(FoodPage(
                             person: int.parse(cubit.data[0]["person"]),
                           ));

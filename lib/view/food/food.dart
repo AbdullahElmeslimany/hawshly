@@ -15,7 +15,7 @@ class FoodPage extends StatelessWidget {
     final dinnerMonth = (person * 20 * 30);
     final additional = (person * 7 * 30);
     final total = breakfastMonth + lunchMonth + dinnerMonth;
-
+    print(person);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
